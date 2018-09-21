@@ -1,0 +1,19 @@
+// This snippet reads the file "qmake.vars" and basically splits each line on
+// "=" and stores the key and value in a map which is then accessible to
+// other places as QmakeVars.
+
+ext.readVarFile = {
+    File varFile = file('../qmake.vars')
+    def qtVars = [:]
+    varFile.eachLine { line ->
+        if (line.trim()) {
+          def eq = line.indexOf('=')
+          if (eq > 0) {
+              def key = line.substring(0, eq)
+              def value = line.substring(eq+1)
+              qtVars."$key" = value
+          }
+        }
+    }
+    return qtVars
+}

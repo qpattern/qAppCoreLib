@@ -1,0 +1,27 @@
+apply from: 'importQmakeVars.gradle'
+
+def QmakeVars = readVarFile()
+
+def versionMajor = QmakeVars.VER_MAJ.toInteger()
+def versionMinor = QmakeVars.VER_MIN.toInteger()
+def versionPatch = QmakeVars.VER_PAT.toInteger()
+
+android {
+    defaultConfig {
+        versionCode versionMajor * 10000 + versionMinor * 100 + versionPatch
+        versionName QmakeVars.VERSION
+        applicationId QmakeVars.PACKAGE
+
+        println "Configuring manifest: versionCode=${versionCode}, versionName=${versionName}, package=${applicationId}"
+    }
+
+    buildTypes {
+        release {
+        }
+
+        debug {
+            applicationIdSuffix ".debug"
+            debuggable true
+        }
+    }
+}

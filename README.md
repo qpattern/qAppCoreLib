@@ -21,3 +21,31 @@ include($$PWD/qAppCoreLib/qAppCoreLib.pri)
 You might have to adjust the path, in case this library is not in a folder in the root of the project.
 
 For a simple working example use the repository [qCoreAppLibExample](https://github.com/qpattern/qAppCoreLibExample).
+
+# Application metadata
+
+It's possible to enforce the application version and the package name from the _.pro_ file, writing the following in it:
+
+```make
+VER_MAJ = 0
+VER_MIN = 0
+VER_PAT = 1
+
+PACKAGE = com.example.exampleapp
+
+android {
+    include(libs/qtAppCoreLib/exportVariables.pri)
+}
+```
+
+The first three variables indicate the major, minor and patch version respectively. _PACKAGE_, as the name suggests, contains the package name.
+
+Note: at the moment only Android is supported.
+
+## Android
+
+In order to make sure that the values specified in the _pro_ file are written in the manifest, insert the following line in the `build.gradle`:
+
+```groovy
+apply from: 'overrideVersion.gradle'
+```
