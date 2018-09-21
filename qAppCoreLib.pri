@@ -13,6 +13,15 @@ SOURCES += \
 	$$PWD/src/qAppCoreLib/controller/AbstractManager.cpp \
     $$PWD/src/qAppCoreLib/controller/QmlViewManager.cpp
 
+contains( QT, sql ) {
+    HEADERS += \
+        $$PWD/src/qAppCoreLib/persistence/AbstractPersistenceManager.h \
+        $$PWD/src/qAppCoreLib/persistence/PersistenceMacros.h
+
+    SOURCES += \
+        $$PWD/src/qAppCoreLib/persistence/AbstractPersistenceManager.cpp
+}
+
 DISTFILES += \
     $$PWD/exportVariables.pri
 
